@@ -39,10 +39,16 @@ public abstract class Item {
 
 	//비즈니스 로직
 	//Setter를 안쓰고 내부처리를 이렇게 해줄수도 있다는걸 보여줌
+	/*
+	 * 수량 추가
+	 */
 	public void addStock(int quantity) {
 		this.stockQuantity += quantity;
 	}
 	
+	/*
+	 * 수량 제거
+	 */
 	public void removeStock(int quantity) {
 		int restStock = this.stockQuantity - quantity;
 		if(restStock < 0) {
