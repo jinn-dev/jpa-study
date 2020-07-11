@@ -34,7 +34,7 @@ public class OrderServiceTest {
 	OrderRepository orderRePository;
 
 	@Test
-	public void »óÇ°ÁÖ¹®() throws Exception {
+	public void ìƒí’ˆì£¼ë¬¸() throws Exception {
 		// given
 
 		Member member = createMember();
@@ -49,29 +49,29 @@ public class OrderServiceTest {
 		// then
 		Order getOrder = orderRePository.findOne(orderId);
 
-		assertEquals("»óÇ° ÁÖ¹® ½Ã »óÅÂ´Â ORDER", OrderStatus.ORDER, getOrder.getStatus());
-		assertEquals("ÁÖ¹®ÇÑ »óÇ° Á¾·ù ¼ö°¡ Á¤È®ÇØ¾ß ÇÑ´Ù.", 1, getOrder.getOrderItems().size());
-		assertEquals("ÁÖ¹® °¡°İÀº °¡°İ * ¼ö·®ÀÌ´Ù.", 1000 * orderCount, getOrder.getTotalPrice());
-		assertEquals("ÁÖ¹® ¼ö·®¸¸Å­ Àç°í°¡ ÁÙ¾î¾ß ÇÑ´Ù.", 8, book.getStockQuantity());
+		assertEquals("ìƒí’ˆ ì£¼ë¬¸ ì‹œ ìƒíƒœëŠ” ORDER", OrderStatus.ORDER, getOrder.getStatus());
+		assertEquals("ì£¼ë¬¸í•œ ìƒí’ˆ ì¢…ë¥˜ ìˆ˜ê°€ ì •í™•í•´ì•¼ í•œë‹¤.", 1, getOrder.getOrderItems().size());
+		assertEquals("ì£¼ë¬¸ ê°€ê²©ì€ ê°€ê²© * ìˆ˜ëŸ‰ì´ë‹¤.", 1000 * orderCount, getOrder.getTotalPrice());
+		assertEquals("ì£¼ë¬¸ ìˆ˜ëŸ‰ë§Œí¼ ì¬ê³ ê°€ ì¤„ì–´ì•¼ í•œë‹¤.", 8, book.getStockQuantity());
 	}
 
 	@Test(expected = NotEnoughStockException.class)
-	public void »óÇ°ÁÖ¹®_Àç°í¼ö·®ÃÊ°ú() throws Exception {
+	public void ìƒí’ˆì£¼ë¬¸_ì¬ê³ ìˆ˜ëŸ‰ì´ˆê³¼() throws Exception {
 		// given
 		Member member = createMember();
 		Item book = createBook("AAA", 10000, 10);
 
-		int orderCount = 9;
+		int orderCount = 11;
 
 		// when
 		orderService.order(member.getId(), book.getId(), orderCount);
 
 		// then
-		fail("Àç°í ¼ö·® ºÎÁ· ¿¹¿Ü°¡ ¹ß»ıÇØ¾ß ÇÑ´Ù.");
+		fail("ì¬ê³  ìˆ˜ëŸ‰ ë¶€ì¡± ì˜ˆì™¸ê°€ ë°œìƒí•´ì•¼ í•œë‹¤.");
 	}
 	
 	@Test
-	public void ÁÖ¹®Ãë¼Ò() throws Exception {
+	public void ì£¼ë¬¸ì·¨ì†Œ() throws Exception {
 		//given
 		Member member = createMember();
 		Book item = createBook("AAA", 10000, 10);
@@ -85,14 +85,14 @@ public class OrderServiceTest {
 		//then
 		Order getOrder = orderRePository.findOne(orderId);
 		
-		assertEquals("ÁÖ¹® Ãë¼Ò½Ã »óÅÂ´Â CANCEL ÀÌ´Ù.", OrderStatus.CANCEL, getOrder.getStatus());
-		assertEquals("ÁÖ¹®ÀÌ Ãë¼ÒµÈ »óÇ°Àº ±×¸¸Å­ Àç°í°¡ Áõ°¡ÇØ¾ß ÇÑ´Ù.", 10, item.getStockQuantity());
+		assertEquals("ì£¼ë¬¸ ì·¨ì†Œì‹œ ìƒíƒœëŠ” CANCEL ì´ë‹¤.", OrderStatus.CANCEL, getOrder.getStatus());
+		assertEquals("ì£¼ë¬¸ì´ ì·¨ì†Œëœ ìƒí’ˆì€ ê·¸ë§Œí¼ ì¬ê³ ê°€ ì¦ê°€í•´ì•¼ í•œë‹¤.", 10, item.getStockQuantity());
 	}
 
 	private Member createMember() {
 		Member member = new Member();
-		member.setName("È«±æµ¿");
-		member.setAddress(new Address("¼­¿ï", "ÇÑ°­", "12345"));
+		member.setName("í™ê¸¸ë™");
+		member.setAddress(new Address("ì„œìš¸", "í•œê°•", "12345"));
 		em.persist(member);
 		return member;
 	}

@@ -28,7 +28,7 @@ public class MemberServiceTest {
 	EntityManager em;
 
 	@Test
-	public void È¸¿ø°¡ÀÔ() throws Exception {
+	public void íšŒì›ê°€ì…() throws Exception {
 		// Given
 		Member member = new Member();
 		member.setName("kim");
@@ -41,7 +41,7 @@ public class MemberServiceTest {
 	}
 
 	@Test(expected = IllegalStateException.class)
-	public void Áßº¹_È¸¿ø_¿¹¿Ü() throws Exception {
+	public void ì¤‘ë³µ_íšŒì›_ì˜ˆì™¸() throws Exception {
 		
 		// Given
 		Member member1 = new Member();
@@ -51,9 +51,9 @@ public class MemberServiceTest {
 	
 		// When
 		memberService.join(member1);
-		memberService.join(member2); // ¿¹¿Ü°¡ ¹ß»ıÇØ¾ß ÇÑ´Ù.
+		memberService.join(member2); // ì˜ˆì™¸ê°€ ë°œìƒí•´ì•¼ í•œë‹¤.
 		
 		// Then
-		fail("¿¹¿Ü°¡ ¹ß»ıÇØ¾ß ÇÑ´Ù.");
+		fail("ì˜ˆì™¸ê°€ ë°œìƒí•´ì•¼ í•œë‹¤.");
 	}
 }
