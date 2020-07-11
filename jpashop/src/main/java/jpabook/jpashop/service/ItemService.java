@@ -21,6 +21,19 @@ public class ItemService {
 		itemRepository.save(item);
 	}
 
+	/*
+	 * 영속성 컨텍스트가 자동 변경
+	 */
+	@Transactional
+	public void updateItem(Long itemId, String name, int price, int stockQuantity) {
+
+		Item findItem = itemRepository.findOne(itemId);
+		
+		findItem.setPrice(price);
+		findItem.setName(name);
+		findItem.setStockQuantity(stockQuantity);
+	}
+	
 	public List<Item> findItems() {
 		return itemRepository.findAll();
 	}

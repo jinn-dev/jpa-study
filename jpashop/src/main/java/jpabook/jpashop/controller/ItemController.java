@@ -65,7 +65,8 @@ public class ItemController {
 	@PostMapping("/items/{itemId}/edit") 
 	public String updateItem(BookForm form) {
 		
-		//주의사항: id 값을 조작해서 넘어올 수 있는 취약점이 있어 권한 체크 해줘야 함
+		//주의사항1: id 값을 조작해서 넘어올 수 있는 취약점이 있어 권한 체크 해줘야 함
+		/*
 		Book book = new Book();
 		book.setId(form.getId());
 		book.setName(form.getName());
@@ -75,6 +76,10 @@ public class ItemController {
 		book.setIsbn(form.getIsbn());
 		
 		itemService.saveItem(book);
+		*/
+		
+		itemService.updateItem(form.getId(), form.getName(), form.getPrice(), form.getStockQuantity());
+		
 		
 		return "redirect:/items";
 		
