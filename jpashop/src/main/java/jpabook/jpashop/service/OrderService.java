@@ -23,45 +23,45 @@ public class OrderService {
 	private final ItemRepository itemRepository;
 	
 	/*
-	 * ÁÖ¹®
+	 * ì£¼ë¬¸
 	 */
 	public Long order(Long memberId, Long itemId, int count) {
 		
-		//¿£Æ¼Æ¼ Á¶È¸
+		//ì—”í‹°í‹° ì¡°íšŒ
 		Member member = memberRepository.findOne(memberId);
 		Item item = itemRepository.findOne(itemId);
 		
-		//¹è¼ÛÁ¤º¸ »ı¼º
+		//ë°°ì†¡ì •ë³´ ìƒì„±
 		Delivery delivery = new Delivery();
 		delivery.setAdress(member.getAddress());
 		
-		//ÁÖ¹®»óÇ° »ı¼º
+		//ì£¼ë¬¸ìƒí’ˆ ìƒì„±
 		OrderItem orderItem = OrderItem.createOrderItem(item, item.getPrice(), count);
 		
-		//ÁÖ¹® »ı¼º
+		//ì£¼ë¬¸ ìƒì„±
 		Order order = Order.createOrder(member, delivery, orderItem);
 		
-		//ÁÖ¹® ÀúÀå
-		//cascade°¡ µÇÀÖ±â ¶§¹®¿¡ delivery¿Í orderµµ ÀÚµ¿À¸·Î persistµÈ´Ù.
-		//Áö¿ï¶§µµ Àû¿ëµÇ¹Ç·Î º¹ÀâÇÑ °æ¿ì º°µµÀÇ repository ±¸¼ºÇÏ¿© »ç¿ëÇÏÀÚ.
+		//ì£¼ë¬¸ ì €ì¥
+		//cascadeê°€ ë˜ìˆê¸° ë•Œë¬¸ì— deliveryì™€ orderë„ ìë™ìœ¼ë¡œ persistëœë‹¤.
+		//ì§€ìš¸ë•Œë„ ì ìš©ë˜ë¯€ë¡œ ë³µì¡í•œ ê²½ìš° ë³„ë„ì˜ repository êµ¬ì„±í•˜ì—¬ ì‚¬ìš©í•˜ì.
 		orderRepository.save(order);
 		
 		return order.getId();
 	}
 	
 	/*
-	 * Ãë¼Ò
+	 * ì·¨ì†Œ
 	 */
 	@Transactional
 	public void cancelOrder(Long orderId) {
-		//ÁÖ¹® ¿£Æ¼Æ¼ Á¶È¸
+		//ì£¼ë¬¸ ì—”í‹°í‹° ì¡°íšŒ
 		Order order = orderRepository.findOne(orderId);
 		
-		//ÁÖ¹® Ãë¼Ò
+		//ì£¼ë¬¸ ì·¨ì†Œ
 		order.cancel();
 	}
 	
 	/*
-	 * °Ë»ö
+	 * ê²€ìƒ‰
 	 */
 }
