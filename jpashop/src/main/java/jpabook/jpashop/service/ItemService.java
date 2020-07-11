@@ -13,26 +13,18 @@ import lombok.RequiredArgsConstructor;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class ItemService {
-	
+
 	private final ItemRepository itemRepository;
-	
-	/*
-	 * 상품 저장
-	 */
+
+	@Transactional
 	public void saveItem(Item item) {
 		itemRepository.save(item);
 	}
-	
-	/*
-	 * 상품 전체 조회
-	 */
-	public List<Item> findITems() {
+
+	public List<Item> findItems() {
 		return itemRepository.findAll();
 	}
-	
-	/*
-	 * 상품 단건 조회
-	 */
+
 	public Item findOne(Long id) {
 		return itemRepository.findOne(id);
 	}
